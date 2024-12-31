@@ -3,10 +3,11 @@
 apiVersion: backstage.io/v1alpha1
 kind: User
 metadata:
-  name: erik.thorne
+  name: 'erik.thorne'
 spec:
   profile:
-    email: erik.thorne@tylertech.com
+    name: 'Erik Thorne'
+    email: 'erik.thorne@tylertech.com'
   memberOf: [data-insights]
 ---
 # https://backstage.io/docs/features/software-catalog/descriptor-format#kind-group
