@@ -13,6 +13,9 @@ backend.add(import('@backstage/plugin-auth-backend'));
 backend.add(import('@backstage/plugin-auth-backend-module-guest-provider')); // TODO
 backend.add(import('@backstage/plugin-auth-backend-module-atlassian-provider'));
 
+// events plugin
+backend.add(import('@backstage/plugin-events-backend'))
+
 // catalog plugin
 backend.add(import('@backstage/plugin-catalog-backend'));
 backend.add(import('@backstage/plugin-catalog-backend-module-scaffolder-entity-model'));
