@@ -34,7 +34,7 @@ backend:
       host: localhost
       port: 5432
       user: "service_registry_db_user"
-      password: "OpenData!"
+      password: ${PG_PASSWORD}
 
 workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
@@ -68,11 +68,18 @@ techdocs:
   publisher:
     type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
 
-auth:
-  # see https://backstage.io/docs/auth/ to learn about auth providers
+auth: # see https://backstage.io/docs/auth/ to learn about auth providers
+  environment: development
   providers:
-    # See https://backstage.io/docs/auth/guest/provider
-    guest: {}
+    guest: {} # See https://backstage.io/docs/auth/guest/provider
+    atlassian: # See https://backstage.io/docs/auth/atlassian/provider/
+      development:
+        clientId: ${AUTH_ATLASSIAN_CLIENT_ID}
+        clientSecret: ${AUTH_ATLASSIAN_CLIENT_SECRET}
+        #additionalScopes: ${AUTH_ATLASSIAN_SCOPES}
+        signIn:
+          resolvers:
+            - resolver: emailMatchingUserEntityProfileEmail
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options

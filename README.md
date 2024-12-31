@@ -1,10 +1,11 @@
-# [Backstage](https://backstage.io)
+# Service Registry
 
-This is your newly scaffolded Backstage App, Good Luck!
+This is the backstage implementation for Data & Insights.
 
 To start the app, run:
 
 ```sh
+source .env
 yarn install
 yarn dev
 ```

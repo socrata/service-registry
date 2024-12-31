@@ -3,15 +3,17 @@
 apiVersion: backstage.io/v1alpha1
 kind: User
 metadata:
-  name: guest
+  name: erik.thorne
 spec:
-  memberOf: [guests]
+  profile:
+    email: erik.thorne@tylertech.com
+  memberOf: [data-insights]
 ---
 # https://backstage.io/docs/features/software-catalog/descriptor-format#kind-group
 apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
-  name: guests
+  name: data-insights
 spec:
   type: team
   children: []

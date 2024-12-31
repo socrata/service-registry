@@ -31,6 +31,7 @@ import {
   OAuthRequestDialog,
   SignInPage,
 } from '@backstage/core-components';
+import { atlassianAuthApiRef } from '@backstage/core-plugin-api';
 import { createApp } from '@backstage/app-defaults';
 import { AppRouter, FlatRoutes } from '@backstage/core-app-api';
 import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
@@ -57,7 +58,19 @@ const app = createApp({
     });
   },
   components: {
-    SignInPage: props => <SignInPage {...props} auto providers={['guest']} />,
+    SignInPage: props => (
+      <SignInPage {...props}
+        auto
+        providers={[
+          {
+            id: "atlassian-auth-provider",
+            title: "Atlassian",
+            message: "Sign in using Atlassian",
+            apiRef: atlassianAuthApiRef
+          }
+        ]}
+      />,
+    )
   },
 });
 

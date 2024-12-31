@@ -23,9 +23,24 @@ backend:
       user: ${POSTGRES_USER}
       password: ${POSTGRES_PASSWORD}
 
-auth:
+auth: # see https://backstage.io/docs/auth/ to learn about auth providers
+  environment: production
   providers:
-    guest: {}
+    atlassian: # See https://backstage.io/docs/auth/atlassian/provider/
+      development:
+        clientId: ${AUTH_ATLASSIAN_CLIENT_ID}
+        clientSecret: ${AUTH_ATLASSIAN_CLIENT_SECRET}
+        callbackUrl: 'https://localhost:7007/api/auth/atlassian/handler/frame'
+        additionalScopes:
+          - 'read:jira-user'
+          - 'read:jira-work'
+          - 'offline_access'
+          - 'write:jira-work'
+        signIn:
+          resolvers:
+            - resolver: emailMatchingUserEntityProfileEmail
+            - resolver: emailLocalPartMatchingUserEntityName
+            - resolver: usernameMatchingUserEntityName
 
 catalog:
   # Overrides the default list locations from app-config.yaml as these contain example data.
