@@ -41,13 +41,8 @@ workingDirectory: /tmp # Use this to configure a working directory for the scaff
 integrations:
   github:
     - host: github.com
-      # This is a Personal Access Token or PAT from GitHub. You can find out how to generate this token, and more information
-      # about setting up the GitHub integration here: https://backstage.io/docs/integrations/github/locations#configuration
-      token: ${GITHUB_TOKEN}
-    ### Example for how to add your GitHub Enterprise instance using the API:
-    # - host: ghe.example.net
-    #   apiBaseUrl: https://ghe.example.net/api/v3
-    #   token: ${GHE_TOKEN}
+      apps:
+        - $include: github-app-socrata-backstage-credentials.yaml
 
 proxy:
   ### Example for how to add a proxy endpoint for the frontend.
@@ -76,15 +71,27 @@ auth: # see https://backstage.io/docs/auth/ to learn about auth providers
       development:
         clientId: ${AUTH_ATLASSIAN_CLIENT_ID}
         clientSecret: ${AUTH_ATLASSIAN_CLIENT_SECRET}
-        #additionalScopes: ${AUTH_ATLASSIAN_SCOPES}
+        additionalScopes:
+          - 'write:jira-work'
         signIn:
           resolvers:
             - resolver: emailMatchingUserEntityProfileEmail
+            - resolver: emailLocalPartMatchingUserEntityName
+            - resolver: usernameMatchingUserEntityName
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
 
 catalog:
+  providers:
+    githubOrg:
+      id: socrata-github
+      githubUrl: https://github.com
+      orgs: ['socrata'] # TODO - cookbooks and platform
+      schedule:
+        initialDelay: { seconds: 10 }
+        frequency: { hours: 1 }
+        timeout: { minutes: 50 }
   import:
     entityFilename: catalog-info.yaml
     pullRequestBranchName: backstage-integration
@@ -107,17 +114,15 @@ catalog:
       rules:
         - allow: [User, Group]
 
-    ## Uncomment these lines to add more example data
-    # - type: url
-    #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all.yaml
-
-    ## Uncomment these lines to add an example org
-    # - type: url
-    #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme-corp.yaml
-    #   rules:
-    #     - allow: [User, Group]
-
 # see https://backstage.io/docs/permissions/getting-started for more on the permission framework
 permission:
   # setting this to `false` will disable permissions
   enabled: true
+
+events:
+  http:
+    topics:
+      - github
+  modules:
+    github:
+      webhookSecret: ${GITHUB_WORKFLOW_SECRET}

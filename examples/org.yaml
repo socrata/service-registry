@@ -1,15 +1,4 @@
 ---
-# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-user
-apiVersion: backstage.io/v1alpha1
-kind: User
-metadata:
-  name: 'erik.thorne'
-spec:
-  profile:
-    name: 'Erik Thorne'
-    email: 'erik.thorne@tylertech.com'
-  memberOf: [data-insights]
----
 # https://backstage.io/docs/features/software-catalog/descriptor-format#kind-group
 apiVersion: backstage.io/v1alpha1
 kind: Group
