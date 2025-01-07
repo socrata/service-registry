@@ -76,47 +76,51 @@ auth: # see https://backstage.io/docs/auth/ to learn about auth providers
         signIn:
           resolvers:
             - resolver: emailMatchingUserEntityProfileEmail
-            - resolver: emailLocalPartMatchingUserEntityName
-            - resolver: usernameMatchingUserEntityName
 
+# see https://backstage.io/docs/features/software-templates/configuration for software template options
 scaffolder:
-  # see https://backstage.io/docs/features/software-templates/configuration for software template options
 
+# see https://backstage.io/docs/features/software-catalog/configuration
 catalog:
+  stitchingStrategy:
+    mode: immediate
   providers:
-    githubOrg:
-      id: socrata-github
+    githubOrg: # config for getting users/teams into the catalog
+      id: socrata
       githubUrl: https://github.com
       orgs: ['socrata'] # TODO - cookbooks and platform
       schedule:
         initialDelay: { seconds: 10 }
         frequency: { hours: 1 }
         timeout: { minutes: 50 }
-  import:
-    entityFilename: catalog-info.yaml
+    github: # config for getting repository information into the catalog
+      socrata:
+        organization: 'socrata'
+        catalogPath: '/**/service-registry.yaml'
+        filters:
+          branch: 'et/service-registry' # TODO - remove this (is for testing)
+        schedule:
+          frequency: { minutes: 30 }
+          timeout: { minutes: 25 }
+  import: # for the import plugin: https://github.com/backstage/backstage/tree/master/plugins/catalog-import
+    entityFilename: service-registry.yaml
     pullRequestBranchName: backstage-integration
   rules:
     - allow: [Component, System, API, Resource, Location]
-  locations:
-    # Local example data, file locations are relative to the backend process, typically `packages/backend`
+  locations: # file locations are relative to the backend process (`packages/backend`)
     - type: file
-      target: ../../examples/entities.yaml
-
-    # Local example template
+      target: ../../catalog-info/entities.yaml
     - type: file
-      target: ../../examples/template/template.yaml
+      target: ../../catalog-info/template/template.yaml
       rules:
         - allow: [Template]
-
-    # Local example organizational data
     - type: file
-      target: ../../examples/org.yaml
+      target: ../../catalog-info/org.yaml
       rules:
         - allow: [User, Group]
 
-# see https://backstage.io/docs/permissions/getting-started for more on the permission framework
+# see https://backstage.io/docs/permissions/getting-started
 permission:
-  # setting this to `false` will disable permissions
   enabled: true
 
 events:

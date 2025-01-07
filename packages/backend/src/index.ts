@@ -2,6 +2,26 @@ import { createBackend } from '@backstage/backend-defaults';
 import { eventsModuleGithubEventRouter } from '@backstage/plugin-events-backend-module-github/alpha';
 import { eventsModuleGithubWebhook } from '@backstage/plugin-events-backend-module-github/alpha';
 
+import { createBackendModule } from '@backstage/backend-plugin-api';
+import { githubOrgEntityProviderTransformsExtensionPoint } from '@backstage/plugin-catalog-backend-module-github-org';
+import { tylerTechUserTransformer } from './transformers';
+
+const githubOrgModule = createBackendModule({
+  pluginId: 'catalog',
+  moduleId: 'github-org-extensions',
+  register(env) {
+    env.registerInit({
+      deps: {
+        githubOrg: githubOrgEntityProviderTransformsExtensionPoint,
+      },
+      async init({ githubOrg }) {
+        githubOrg.setUserTransformer(tylerTechUserTransformer);
+      },
+    });
+  },
+});
+
+
 const backend = createBackend();
 
 // TODO - do we still need the scaffolders?
@@ -23,13 +43,16 @@ backend.add(import('@backstage/plugin-events-backend'))
 // catalog plugin
 backend.add(import('@backstage/plugin-catalog-backend'));
 backend.add(import('@backstage/plugin-catalog-backend-module-scaffolder-entity-model'));
+backend.add(import('@backstage/plugin-catalog-backend-module-github'));
 
 // github org provider
 backend.add(eventsModuleGithubEventRouter);
 backend.add(eventsModuleGithubWebhook);
 backend.add(import('@backstage/plugin-catalog-backend-module-github-org'));
+backend.add(githubOrgModule);
 
 // See https://backstage.io/docs/features/software-catalog/configuration#subscribing-to-catalog-errors
+// this enables logging of errors from the catalog
 backend.add(import('@backstage/plugin-catalog-backend-module-logs'));
 
 // permission plugin
