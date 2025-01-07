@@ -36,8 +36,6 @@ backend:
       user: "service_registry_db_user"
       password: ${PG_PASSWORD}
 
-workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
-
 integrations:
   github:
     - host: github.com
@@ -73,9 +71,6 @@ auth: # see https://backstage.io/docs/auth/ to learn about auth providers
         clientSecret: ${AUTH_ATLASSIAN_CLIENT_SECRET}
         additionalScopes:
           - 'write:jira-work'
-        signIn:
-          resolvers:
-            - resolver: emailMatchingUserEntityProfileEmail
 
 # see https://backstage.io/docs/features/software-templates/configuration for software template options
 scaffolder:

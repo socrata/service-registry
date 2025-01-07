@@ -1,11 +1,14 @@
 import { createBackend } from '@backstage/backend-defaults';
 import { eventsModuleGithubEventRouter } from '@backstage/plugin-events-backend-module-github/alpha';
 import { eventsModuleGithubWebhook } from '@backstage/plugin-events-backend-module-github/alpha';
-
 import { createBackendModule } from '@backstage/backend-plugin-api';
 import { githubOrgEntityProviderTransformsExtensionPoint } from '@backstage/plugin-catalog-backend-module-github-org';
+import { atlassianAuthenticator } from '@backstage/plugin-auth-backend-module-atlassian-provider';
+import { authProvidersExtensionPoint, createOAuthProviderFactory } from '@backstage/plugin-auth-node';
 import { tylerTechUserTransformer } from './transformers';
+import { tylerTechSignInResolver } from './signInResolvers';
 
+// create custom module to link up custom user transformers (for the catalog)
 const githubOrgModule = createBackendModule({
   pluginId: 'catalog',
   moduleId: 'github-org-extensions',
@@ -16,6 +19,29 @@ const githubOrgModule = createBackendModule({
       },
       async init({ githubOrg }) {
         githubOrg.setUserTransformer(tylerTechUserTransformer);
+      },
+    });
+  },
+});
+
+// create custom module to allow any tylertech email
+// NOTE: someday we should remove this in favor of matching users in the catalog
+const tylerTechAuthModule = createBackendModule({
+  pluginId: 'auth',
+  moduleId: 'auth-provider-allow-tylertech',
+  register(reg) {
+    reg.registerInit({
+      deps: { providers: authProvidersExtensionPoint },
+      async init({ providers }) {
+        providers.registerProvider({
+          providerId: 'atlassian',
+          factory: createOAuthProviderFactory({
+            authenticator: atlassianAuthenticator,
+            async signInResolver(info, ctx) {
+              return await tylerTechSignInResolver(info, ctx)
+            }
+          }),
+        });
       },
     });
   },
@@ -35,7 +61,7 @@ backend.add(import('@backstage/plugin-techdocs-backend'));
 // auth plugin
 backend.add(import('@backstage/plugin-auth-backend'));
 backend.add(import('@backstage/plugin-auth-backend-module-guest-provider')); // TODO
-backend.add(import('@backstage/plugin-auth-backend-module-atlassian-provider'));
+backend.add(tylerTechAuthModule);
 
 // events plugin
 backend.add(import('@backstage/plugin-events-backend'))
