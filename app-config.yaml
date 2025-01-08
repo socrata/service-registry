@@ -84,8 +84,6 @@ catalog:
       socrata:
         organization: 'socrata'
         catalogPath: '/**/service-registry.yaml'
-        filters:
-          branch: 'et/service-registry' # TODO - remove this (is for testing)
         schedule:
           frequency: { minutes: 30 }
           timeout: { minutes: 25 }
