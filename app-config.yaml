@@ -43,9 +43,6 @@ integrations:
         - $include: github-app-socrata-backstage-credentials.yaml
 
 # Reference documentation http://backstage.io/docs/features/techdocs/configuration
-# Note: After experimenting with basic setup, use CI/CD to generate docs
-# and an external cloud storage when deploying TechDocs for production use-case.
-# https://backstage.io/docs/features/techdocs/how-to-guides#how-to-migrate-from-techdocs-basic-to-recommended-deployment-approach
 techdocs:
   builder: 'local' # Alternatives - 'external'
   generator:
@@ -56,7 +53,6 @@ techdocs:
 auth: # see https://backstage.io/docs/auth/ to learn about auth providers
   environment: development
   providers:
-    guest: {} # See https://backstage.io/docs/auth/guest/provider
     atlassian: # See https://backstage.io/docs/auth/atlassian/provider/
       development:
         clientId: ${AUTH_ATLASSIAN_CLIENT_ID}
