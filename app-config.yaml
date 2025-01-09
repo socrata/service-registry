@@ -49,9 +49,9 @@ integrations:
 techdocs:
   builder: 'local' # Alternatives - 'external'
   generator:
-    runIn: 'docker' # Alternatives - 'local'
+    runIn: 'local' # Alternatives - 'docker'
   publisher:
-    type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
+    type: 'local' # Alternatives - 'googleGcs' or 'awsS3'
 
 auth: # see https://backstage.io/docs/auth/ to learn about auth providers
   environment: development
