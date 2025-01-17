@@ -53,12 +53,11 @@ techdocs:
 auth: # see https://backstage.io/docs/auth/ to learn about auth providers
   environment: development
   providers:
-    atlassian: # See https://backstage.io/docs/auth/atlassian/provider/
+    okta:
       development:
-        clientId: ${AUTH_ATLASSIAN_CLIENT_ID}
-        clientSecret: ${AUTH_ATLASSIAN_CLIENT_SECRET}
-        additionalScopes:
-          - 'write:jira-work'
+        clientId: ${AUTH_OKTA_CLIENT_ID}
+        clientSecret: ${AUTH_OKTA_CLIENT_SECRET}
+        audience: 'https://socrata.okta.com'
 
 # see https://backstage.io/docs/features/software-templates/configuration for software template options
 scaffolder:

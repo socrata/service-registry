@@ -1,7 +1,7 @@
 import { SignInResolver } from '@backstage/plugin-auth-node';
 import { stringifyEntityRef, DEFAULT_NAMESPACE } from '@backstage/catalog-model';
 
-export const tylerTechSignInResolver: SignInResolver = async (info, ctx) => {
+export const signInResolver: SignInResolver = async (info, ctx) => {
   const { profile: { email } } = info;
 
   // Profiles are not always guaranteed to to have an email address.

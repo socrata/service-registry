@@ -3,10 +3,10 @@ import { eventsModuleGithubEventRouter } from '@backstage/plugin-events-backend-
 import { eventsModuleGithubWebhook } from '@backstage/plugin-events-backend-module-github/alpha';
 import { createBackendModule } from '@backstage/backend-plugin-api';
 import { githubOrgEntityProviderTransformsExtensionPoint } from '@backstage/plugin-catalog-backend-module-github-org';
-import { atlassianAuthenticator } from '@backstage/plugin-auth-backend-module-atlassian-provider';
+import { oktaAuthenticator } from '@backstage/plugin-auth-backend-module-okta-provider';
 import { authProvidersExtensionPoint, createOAuthProviderFactory } from '@backstage/plugin-auth-node';
 import { tylerTechUserTransformer } from './transformers';
-import { tylerTechSignInResolver } from './signInResolvers';
+import { signInResolver } from './signInResolvers';
 
 // create custom module to link up custom user transformers (for the catalog)
 const githubOrgModule = createBackendModule({
@@ -24,22 +24,21 @@ const githubOrgModule = createBackendModule({
   },
 });
 
+
 // create custom module to allow any tylertech email
 // NOTE: someday we should remove this in favor of matching users in the catalog
-const tylerTechAuthModule = createBackendModule({
+const authModuleWithCustomResolver = createBackendModule({
   pluginId: 'auth',
-  moduleId: 'auth-provider-allow-tylertech',
+  moduleId: 'auth-provider-allow-tylertech-skip-catalog',
   register(reg) {
     reg.registerInit({
       deps: { providers: authProvidersExtensionPoint },
       async init({ providers }) {
         providers.registerProvider({
-          providerId: 'atlassian',
+          providerId: 'okta',
           factory: createOAuthProviderFactory({
-            authenticator: atlassianAuthenticator,
-            async signInResolver(info, ctx) {
-              return await tylerTechSignInResolver(info, ctx)
-            }
+            authenticator: oktaAuthenticator,
+            signInResolver
           }),
         });
       },
@@ -59,7 +58,7 @@ backend.add(import('@backstage/plugin-techdocs-backend'));
 
 // auth plugin
 backend.add(import('@backstage/plugin-auth-backend'));
-backend.add(tylerTechAuthModule);
+backend.add(authModuleWithCustomResolver);
 
 // events plugin
 backend.add(import('@backstage/plugin-events-backend'))
