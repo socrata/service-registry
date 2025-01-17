@@ -1,6 +1,6 @@
 import { createBackend } from '@backstage/backend-defaults';
-import { eventsModuleGithubEventRouter } from '@backstage/plugin-events-backend-module-github/alpha';
-import { eventsModuleGithubWebhook } from '@backstage/plugin-events-backend-module-github/alpha';
+//import { eventsModuleGithubEventRouter } from '@backstage/plugin-events-backend-module-github/alpha';
+//import { eventsModuleGithubWebhook } from '@backstage/plugin-events-backend-module-github/alpha';
 import { createBackendModule } from '@backstage/backend-plugin-api';
 import { githubOrgEntityProviderTransformsExtensionPoint } from '@backstage/plugin-catalog-backend-module-github-org';
 import { oktaAuthenticator } from '@backstage/plugin-auth-backend-module-okta-provider';
@@ -61,7 +61,7 @@ backend.add(import('@backstage/plugin-auth-backend'));
 backend.add(authModuleWithCustomResolver);
 
 // events plugin
-backend.add(import('@backstage/plugin-events-backend'))
+//backend.add(import('@backstage/plugin-events-backend'))
 
 // catalog plugin
 backend.add(import('@backstage/plugin-catalog-backend'));
@@ -69,8 +69,8 @@ backend.add(import('@backstage/plugin-catalog-backend-module-scaffolder-entity-m
 backend.add(import('@backstage/plugin-catalog-backend-module-github'));
 
 // github org provider
-backend.add(eventsModuleGithubEventRouter);
-backend.add(eventsModuleGithubWebhook);
+//backend.add(eventsModuleGithubEventRouter);
+//backend.add(eventsModuleGithubWebhook);
 backend.add(import('@backstage/plugin-catalog-backend-module-github-org'));
 backend.add(githubOrgModule);
 

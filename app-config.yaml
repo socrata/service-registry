@@ -103,10 +103,10 @@ catalog:
 permission:
   enabled: true
 
-events:
-  http:
-    topics:
-      - github
-  modules:
-    github:
-      webhookSecret: ${GITHUB_WORKFLOW_SECRET}
+#events:
+#  http:
+#    topics:
+#      - github
+#  modules:
+#    github:
+#      webhookSecret: ${GITHUB_WORKFLOW_SECRET}
