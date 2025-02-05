@@ -58,6 +58,9 @@ auth: # see https://backstage.io/docs/auth/ to learn about auth providers
         clientId: ${AUTH_OKTA_CLIENT_ID}
         clientSecret: ${AUTH_OKTA_CLIENT_SECRET}
         audience: 'https://socrata.okta.com'
+        signIn:
+          resolvers:
+            - resolver: emailMatchingUserEntityProfileEmail
 
 # see https://backstage.io/docs/features/software-templates/configuration for software template options
 scaffolder:
@@ -66,15 +69,17 @@ scaffolder:
 catalog:
   stitchingStrategy:
     mode: immediate
+  orphanStrategy: delete
+  # readonly: true # TODO - this maybe be worthwhile, since I don't think we're creating/updating/deleting
   providers:
-    githubOrg: # config for getting users/teams into the catalog
-      id: socrata
-      githubUrl: https://github.com
-      orgs: ['socrata'] # TODO - cookbooks and platform
-      schedule:
-        initialDelay: { seconds: 10 }
-        frequency: { hours: 1 }
-        timeout: { minutes: 50 }
+    #githubOrg: # config for getting users/teams into the catalog
+    #  id: socrata
+    #  githubUrl: https://github.com
+    #  orgs: ['socrata'] # TODO - cookbooks and platform
+    #  schedule:
+    #    initialDelay: { seconds: 10 }
+    #    frequency: { hours: 1 }
+    #    timeout: { minutes: 50 }
     github: # config for getting repository information into the catalog
       socrata:
         organization: 'socrata'
@@ -82,6 +87,22 @@ catalog:
         schedule:
           frequency: { minutes: 30 }
           timeout: { minutes: 25 }
+    microsoftGraphOrg:
+      default:
+        tenantId: ${AZURE_TENANT_ID}
+        clientId: ${AZURE_CLIENT_ID}
+        clientSecret: ${AZURE_CLIENT_SECRET}
+        user:
+          expand: manager
+        groups:
+          includeSubGroups: true
+          expand: member
+          select: ['id', 'displayName', 'description']
+        userGroupMember:
+          filter: "id eq '42a286ac-820c-4f35-90ee-cfbdcceca658'"
+        schedule:
+          frequency: PT1H
+          timeout: PT50M
   import: # for the import plugin: https://github.com/backstage/backstage/tree/master/plugins/catalog-import
     entityFilename: service-registry.yaml
     pullRequestBranchName: backstage-integration

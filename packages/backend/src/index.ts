@@ -6,7 +6,6 @@ import { githubOrgEntityProviderTransformsExtensionPoint } from '@backstage/plug
 import { oktaAuthenticator } from '@backstage/plugin-auth-backend-module-okta-provider';
 import { authProvidersExtensionPoint, createOAuthProviderFactory } from '@backstage/plugin-auth-node';
 import { tylerTechUserTransformer } from './transformers';
-import { signInResolver } from './signInResolvers';
 
 // create custom module to link up custom user transformers (for the catalog)
 const githubOrgModule = createBackendModule({
@@ -25,28 +24,6 @@ const githubOrgModule = createBackendModule({
 });
 
 
-// create custom module to allow any tylertech email
-// NOTE: someday we should remove this in favor of matching users in the catalog
-const authModuleWithCustomResolver = createBackendModule({
-  pluginId: 'auth',
-  moduleId: 'auth-provider-allow-tylertech-skip-catalog',
-  register(reg) {
-    reg.registerInit({
-      deps: { providers: authProvidersExtensionPoint },
-      async init({ providers }) {
-        providers.registerProvider({
-          providerId: 'okta',
-          factory: createOAuthProviderFactory({
-            authenticator: oktaAuthenticator,
-            signInResolver
-          }),
-        });
-      },
-    });
-  },
-});
-
-
 const backend = createBackend();
 
 // TODO - do we still need the scaffolders?
@@ -58,7 +35,7 @@ backend.add(import('@backstage/plugin-techdocs-backend'));
 
 // auth plugin
 backend.add(import('@backstage/plugin-auth-backend'));
-backend.add(authModuleWithCustomResolver);
+backend.add(import('@backstage/plugin-auth-backend-module-okta-provider'));
 
 // events plugin
 //backend.add(import('@backstage/plugin-events-backend'))
@@ -67,6 +44,7 @@ backend.add(authModuleWithCustomResolver);
 backend.add(import('@backstage/plugin-catalog-backend'));
 backend.add(import('@backstage/plugin-catalog-backend-module-scaffolder-entity-model'));
 backend.add(import('@backstage/plugin-catalog-backend-module-github'));
+backend.add(import('@backstage/plugin-catalog-backend-module-msgraph'));
 
 // github org provider
 //backend.add(eventsModuleGithubEventRouter);

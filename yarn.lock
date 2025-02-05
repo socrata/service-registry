@@ -4138,6 +4138,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@backstage/plugin-catalog-backend-module-msgraph@npm:^0.6.6":
+  version: 0.6.6
+  resolution: "@backstage/plugin-catalog-backend-module-msgraph@npm:0.6.6"
+  dependencies:
+    "@azure/identity": "npm:^4.0.0"
+    "@backstage/backend-plugin-api": "npm:^1.1.1"
+    "@backstage/catalog-model": "npm:^1.7.3"
+    "@backstage/config": "npm:^1.3.2"
+    "@backstage/plugin-catalog-common": "npm:^1.1.3"
+    "@backstage/plugin-catalog-node": "npm:^1.15.1"
+    "@microsoft/microsoft-graph-types": "npm:^2.6.0"
+    lodash: "npm:^4.17.21"
+    p-limit: "npm:^3.0.2"
+    qs: "npm:^6.9.4"
+    uuid: "npm:^11.0.0"
+  checksum: 10c0/1593bb6195ab173d9edd859f01c42c2acd95d31cb1a38a5d369a97ffe4aeb92af085390d14288eccf5c376db6ddcb4dba773569f94e65879a60d27869a13853d
+  languageName: node
+  linkType: hard
+
 "@backstage/plugin-catalog-backend-module-scaffolder-entity-model@npm:^0.2.3":
   version: 0.2.3
   resolution: "@backstage/plugin-catalog-backend-module-scaffolder-entity-model@npm:0.2.3"
@@ -4201,6 +4220,17 @@ __metadata:
     "@backstage/plugin-permission-common": "npm:^0.8.3"
     "@backstage/plugin-search-common": "npm:^1.2.16"
   checksum: 10c0/448b1bb587ddb76e8ab2c6066bf9658efb6bf6262ffd95e2fee3defcb2939480a30b2f0585c01c3c03e3ec80160a436ee77cf429316d57db959f4a7dd2841119
+  languageName: node
+  linkType: hard
+
+"@backstage/plugin-catalog-common@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "@backstage/plugin-catalog-common@npm:1.1.3"
+  dependencies:
+    "@backstage/catalog-model": "npm:^1.7.3"
+    "@backstage/plugin-permission-common": "npm:^0.8.4"
+    "@backstage/plugin-search-common": "npm:^1.2.17"
+  checksum: 10c0/b470d76ff6640ba320b4278ef349793ffb6d5bd24bb99eb93d5f615de48a10b180590d4522baadd8603f6597a6e928f1ea4c7db4968ab4cc0ed1aa4da49b8372
   languageName: node
   linkType: hard
 
@@ -4287,6 +4317,22 @@ __metadata:
     "@backstage/plugin-permission-node": "npm:^0.8.6"
     "@backstage/types": "npm:^1.2.0"
   checksum: 10c0/cf9725e97fd35d021d4c2f87eaf819535a6bc31cb118d13746489588b6d74fa601cb669a19e60577bfa073c8b08d58c1ffeeb76d57d36b2aa806cb2359880236
+  languageName: node
+  linkType: hard
+
+"@backstage/plugin-catalog-node@npm:^1.15.1":
+  version: 1.15.1
+  resolution: "@backstage/plugin-catalog-node@npm:1.15.1"
+  dependencies:
+    "@backstage/backend-plugin-api": "npm:^1.1.1"
+    "@backstage/catalog-client": "npm:^1.9.1"
+    "@backstage/catalog-model": "npm:^1.7.3"
+    "@backstage/errors": "npm:^1.2.7"
+    "@backstage/plugin-catalog-common": "npm:^1.1.3"
+    "@backstage/plugin-permission-common": "npm:^0.8.4"
+    "@backstage/plugin-permission-node": "npm:^0.8.7"
+    "@backstage/types": "npm:^1.2.1"
+  checksum: 10c0/0694d52a9652b25b5743fc36757fcc33f1285ad5417af93cd6565b9d4402e1bf5ef2880270e6d3631d4570177e30e5d55e3d5c19c6d7a75ad043319ca9d56940
   languageName: node
   linkType: hard
 
@@ -4530,6 +4576,25 @@ __metadata:
     zod: "npm:^3.22.4"
     zod-to-json-schema: "npm:^3.20.4"
   checksum: 10c0/d006577d1ff6f0b86b0f78699a647d9b9ccde3ec22562688805d5174806c749aeeb6e9114fd1b867a19a944d99a042478d66d3aa713cbb719db81f8c3dc19f03
+  languageName: node
+  linkType: hard
+
+"@backstage/plugin-permission-node@npm:^0.8.7":
+  version: 0.8.7
+  resolution: "@backstage/plugin-permission-node@npm:0.8.7"
+  dependencies:
+    "@backstage/backend-common": "npm:^0.25.0"
+    "@backstage/backend-plugin-api": "npm:^1.1.1"
+    "@backstage/config": "npm:^1.3.2"
+    "@backstage/errors": "npm:^1.2.7"
+    "@backstage/plugin-auth-node": "npm:^0.5.6"
+    "@backstage/plugin-permission-common": "npm:^0.8.4"
+    "@types/express": "npm:^4.17.6"
+    express: "npm:^4.17.1"
+    express-promise-router: "npm:^4.1.0"
+    zod: "npm:^3.22.4"
+    zod-to-json-schema: "npm:^3.20.4"
+  checksum: 10c0/013e8a39550fa6d1b20e75f95924e53074b1e0986beb3e39e6b8db415d12e6507b9c5b4ba56f40c7dd44ba264c8fe5df1a0021197e286115fa1501f2a222f7fd
   languageName: node
   linkType: hard
 
@@ -4999,6 +5064,16 @@ __metadata:
     "@backstage/plugin-permission-common": "npm:^0.8.3"
     "@backstage/types": "npm:^1.2.0"
   checksum: 10c0/e47bbf56922a3422c1768bc200df4b2030438ed7178208fafb514ece28967953f22789d4e29750ba3663a49fd4101d17aebd7b1f49e28e35df7e5d9fbc7c6039
+  languageName: node
+  linkType: hard
+
+"@backstage/plugin-search-common@npm:^1.2.17":
+  version: 1.2.17
+  resolution: "@backstage/plugin-search-common@npm:1.2.17"
+  dependencies:
+    "@backstage/plugin-permission-common": "npm:^0.8.4"
+    "@backstage/types": "npm:^1.2.1"
+  checksum: 10c0/8415a816543590ff856771d2f773636b1e78b73ac918f0460daf70c2bdec12b3e524792efb61f6801c8c07c64132d8d987fc9bebf2f185b48bb3d836db79b3d0
   languageName: node
   linkType: hard
 
@@ -7483,6 +7558,13 @@ __metadata:
   version: 2.0.1
   resolution: "@microsoft/fetch-event-source@npm:2.0.1"
   checksum: 10c0/38c69e9b9990e6cee715c7bbfa2752f943b42575acadb36facf19bb831f1520c469f854277439154258e0e1dc8650cc85038230d1f451e3f6b62e8faeaa1126c
+  languageName: node
+  linkType: hard
+
+"@microsoft/microsoft-graph-types@npm:^2.6.0":
+  version: 2.40.0
+  resolution: "@microsoft/microsoft-graph-types@npm:2.40.0"
+  checksum: 10c0/c6f69a0fe136579d735efafc1375e4540e01d34ea488d987a9b651f7206c40c76991fff56df31e8b2593f16846bd748d0ffcf249d1f2629bb0298e6214fe2fdc
   languageName: node
   linkType: hard
 
@@ -13886,6 +13968,7 @@ __metadata:
     "@backstage/plugin-catalog-backend-module-github": "npm:^0.7.8"
     "@backstage/plugin-catalog-backend-module-github-org": "npm:^0.3.5"
     "@backstage/plugin-catalog-backend-module-logs": "npm:^0.1.5"
+    "@backstage/plugin-catalog-backend-module-msgraph": "npm:^0.6.6"
     "@backstage/plugin-catalog-backend-module-scaffolder-entity-model": "npm:^0.2.3"
     "@backstage/plugin-events-backend": "npm:^0.4.0"
     "@backstage/plugin-events-backend-module-github": "npm:^0.2.15"
