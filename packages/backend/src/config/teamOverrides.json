@@ -1,0 +1,145 @@
+[
+  {
+    "email": "DI-all-employees@tylertech.com",
+    "overrides": {
+      "metadata" : {
+        "name": "defaultOrganizationTransformer"
+      },
+      "spec": {
+        "profile": {
+          "displayName": "Data & Insights"
+        }
+      }
+    }
+  },
+  {
+    "email": "DI-EnterpriseExperienceUS@tylertech.onmicrosoft.com",
+    "overrides": {
+      "metadata" : {
+        "name": "enterprise-experience"
+      },
+      "spec": {
+        "profile": {
+          "displayName": "Enterprise Experience"
+        }
+      }
+    }
+  },
+  {
+    "email": "di-interactive-reporting@tylertech.onmicrosoft.com",
+    "overrides": {
+      "metadata" : {
+        "name": "reporting-us"
+      },
+      "spec": {
+        "profile": {
+          "displayName": "Reporting (US)"
+        }
+      }
+    }
+  },
+  {
+    "email": "DI-ReportingPH@tylertech.onmicrosoft.com",
+    "overrides": {
+      "metadata" : {
+        "name": "reporting-ph"
+      },
+      "spec": {
+        "profile": {
+          "displayName": "Reporting (PH)"
+        }
+      }
+    }
+  },
+  {
+    "email": "di-ai-team@tylertech.onmicrosoft.com",
+    "overrides": {
+      "metadata" : {
+        "name": "ai"
+      },
+      "spec": {
+        "profile": {
+          "displayName": "AI"
+        }
+      }
+    }
+  },
+  {
+    "email": "di-eagle@tylertech.onmicrosoft.com",
+    "overrides": {
+      "metadata" : {
+        "name": "product-operations"
+      },
+      "spec": {
+        "profile": {
+          "displayName": "Product Operations"
+        }
+      }
+    }
+  },
+  {
+    "email": "DIIngressQueries@tylertech.onmicrosoft.com",
+    "overrides": {
+      "metadata" : {
+        "name": "ingress"
+      },
+      "spec": {
+        "profile": {
+          "displayName": "Ingress"
+        }
+      }
+    }
+  },
+  {
+    "email": "access-control-team@tylertech.onmicrosoft.com",
+    "overrides": {
+      "metadata" : {
+        "name": "auth-and-discovery"
+      },
+      "spec": {
+        "profile": {
+          "displayName": "Auth & Discovery"
+        }
+      }
+    }
+  },
+  {
+    "email": "DITire@tylertech.onmicrosoft.com",
+    "overrides": {
+      "metadata" : {
+        "name": "tire"
+      },
+      "spec": {
+        "profile": {
+          "displayName": "TIRE"
+        }
+      }
+    }
+  },
+  {
+    "email": "DandIEventing@tylertech.onmicrosoft.com",
+    "overrides": {
+      "metadata" : {
+        "name": "eventing"
+      },
+      "spec": {
+        "profile": {
+          "displayName": "Eventing"
+        }
+      }
+    }
+  },
+  {
+    "email": "di-security-internal@tylertech.com",
+    "overrides": {
+      "metadata" : {
+        "name": "security"
+      },
+      "spec": {
+        "profile": {
+          "displayName": "Security"
+        }
+      }
+    }
+  }
+]

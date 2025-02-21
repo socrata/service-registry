@@ -94,14 +94,10 @@ catalog:
         clientSecret: ${AZURE_CLIENT_SECRET}
         user:
           expand: manager
-        groups:
+        group: # filter to just the teams we care about
           includeSubGroups: true
-          expand: member
-          select: ['id', 'displayName', 'description']
-        userGroupMember: # we have hella groups, so filter to just the teams we care about
           filter: >
             mail eq 'DI-all-employees@tylertech.com' OR
-            mail eq 'D_I@tylertech.onmicrosoft.com' OR
             mail eq 'DI-EnterpriseExperienceUS@tylertech.onmicrosoft.com' OR
             mail eq 'di-interactive-reporting@tylertech.onmicrosoft.com' OR
             mail eq 'DI-ReportingPH@tylertech.onmicrosoft.com' OR
@@ -110,7 +106,10 @@ catalog:
             mail eq 'DIIngressQueries@tylertech.onmicrosoft.com' OR
             mail eq 'access-control-team@tylertech.onmicrosoft.com' OR
             mail eq 'DITire@tylertech.onmicrosoft.com' OR
+            mail eq 'DandIEventing@tylertech.onmicrosoft.com' OR
             mail eq 'di-security-internal@tylertech.com'
+        userGroupMember:
+          filter: "id eq '42a286ac-820c-4f35-90ee-cfbdcceca658'" # DI-all-employees@tylertech.com
         schedule:
           frequency: PT1H
           timeout: PT50M

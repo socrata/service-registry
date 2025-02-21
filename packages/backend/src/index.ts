@@ -1,28 +1,12 @@
 import { createBackend } from '@backstage/backend-defaults';
 //import { eventsModuleGithubEventRouter } from '@backstage/plugin-events-backend-module-github/alpha';
 //import { eventsModuleGithubWebhook } from '@backstage/plugin-events-backend-module-github/alpha';
-import { createBackendModule } from '@backstage/backend-plugin-api';
-import { githubOrgEntityProviderTransformsExtensionPoint } from '@backstage/plugin-catalog-backend-module-github-org';
 import { oktaAuthenticator } from '@backstage/plugin-auth-backend-module-okta-provider';
 import { authProvidersExtensionPoint, createOAuthProviderFactory } from '@backstage/plugin-auth-node';
-import { tylerTechUserTransformer } from './transformers';
 
-// create custom module to link up custom user transformers (for the catalog)
-const githubOrgModule = createBackendModule({
-  pluginId: 'catalog',
-  moduleId: 'github-org-extensions',
-  register(env) {
-    env.registerInit({
-      deps: {
-        githubOrg: githubOrgEntityProviderTransformsExtensionPoint,
-      },
-      async init({ githubOrg }) {
-        githubOrg.setUserTransformer(tylerTechUserTransformer);
-      },
-    });
-  },
-});
-
+import {
+  microsoftGraphOrgEntityProviderTransformExtensionPoint
+} from '@backstage/plugin-catalog-backend-module-msgraph/alpha';
 
 const backend = createBackend();
 
@@ -38,19 +22,26 @@ backend.add(import('@backstage/plugin-auth-backend'));
 backend.add(import('@backstage/plugin-auth-backend-module-okta-provider'));
 
 // events plugin
+// TODO - either remove these or re-enable
+//      - (predicated on the TODOs on eventsModuleGithub...)
 //backend.add(import('@backstage/plugin-events-backend'))
 
 // catalog plugin
 backend.add(import('@backstage/plugin-catalog-backend'));
 backend.add(import('@backstage/plugin-catalog-backend-module-scaffolder-entity-model'));
-backend.add(import('@backstage/plugin-catalog-backend-module-github'));
+
+// microsoft graph org module
 backend.add(import('@backstage/plugin-catalog-backend-module-msgraph'));
+// microsoft graph extensions (custom transformers)
+backend.add(import('./microsoftGraphTransformers'));
 
 // github org provider
-//backend.add(eventsModuleGithubEventRouter);
-//backend.add(eventsModuleGithubWebhook);
+backend.add(import('@backstage/plugin-catalog-backend-module-github'));
+//backend.add(eventsModuleGithubEventRouter); // TODO - either remove these or re-enable
+//backend.add(eventsModuleGithubWebhook);     // TODO - either remove these or re-enable
 backend.add(import('@backstage/plugin-catalog-backend-module-github-org'));
-backend.add(githubOrgModule);
+// github org extensions (custom transformers)
+backend.add(import('./gitHubTransformers'));
 
 // See https://backstage.io/docs/features/software-catalog/configuration#subscribing-to-catalog-errors
 // this enables logging of errors from the catalog
